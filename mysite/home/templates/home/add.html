@@ -1,0 +1,24 @@
+{% extends "home/nav.html" %}
+
+{% block real_content %}
+
+
+<div>
+  <form method="POST">
+    {% csrf_token %}
+    <div class"form-group">
+      <label>Please enter the name:</label>
+      <input type="text" class="form-control" name="name" placeholder="Enter Name" value="">
+      <br><br>
+      <label>How much do you want to see this item for?</label>
+      <input type="number" class="form-control" name="cost" placeholder="Enter Cost" value=0>
+      <br><br>
+      <label class="btn btn-default btn-file">
+        Browse <input type="file" name="img">
+      </label>
+      <button type="submit" class="btn btn-default">Create Item</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

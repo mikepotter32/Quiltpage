@@ -1,0 +1,53 @@
+{% extends "home/nav.html" %}
+
+{% block real_content %}
+
+  <div class="container-fluid">
+    <ul class="nav nav-tabs" id="myTab">
+      <li class="active"><a data-toggle="tab" href="#quilts">Quilts</a></li>
+      <li><a data-toggle="tab" href="#yarn">Yarn Creations</a></li>
+    </ul>
+  </div>
+
+  <div class="tab-content">
+    <div id="quilts" class="tab-pane fade active in">
+      <ul class="pager">
+        {% if quilt_list.has_previous %}
+          <li><a href="?page={{quilt_list.previous_page_number}}">previous</a></li>
+        {% else %}
+          <li><a class="btn disabled">previous</a></li>
+        {% endif %}
+        <span class="current">
+          Page {{ quilt_list.number }} of {{ quilt_list.paginator.num_pages }}.
+        </span>
+        {% if quilt_list.has_next %}
+          <li><a href="?page={{ quilt_list.next_page_number}}">next</a></li>
+        {% else %}
+          <li><a class="btn disabled">next</a></li>
+        {% endif %}
+      </ul>
+
+      <div>
+        {% for item in quilt_list %}
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <span><a href="#" class="panel-title">{{item.quiltID}}</a></span>
+            </div>
+            <div class="panel-body">
+              {% load staticfiles %}
+              <img src="{% static item.pic.url %}" heigh="300" width="300" class="img-responsive center-block" />
+            </div>
+            <div class="panel-footer">
+              <h3>$ {{item.cost}}</h3>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+
+    <div id="yarn" class="tab-pane fade in">
+
+    </div>
+  </div>
+</body>
+
+{% endblock %}
