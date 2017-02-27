@@ -8,7 +8,7 @@ from .forms import QuiltForm
 
 def home(request):
     quilts = Quilt.objects.all()
-    paginator = Paginator(quilts, 20)
+    paginator = Paginator(quilts, 8)
     page = request.GET.get('page')
     try:
         quilt_list = paginator.page(page)
@@ -22,11 +22,11 @@ def home(request):
 
 def add(request):
     if request.method == 'POST':
-        quiltform = QuiltForm(request.POST)
+        quiltform = QuiltForm(request.POST, request.FILES)
         instance = quiltform.save(commit=False)
         instance.cost = request.POST.get('cost')
         instance.quiltID = request.POST.get('name')
-        instance.pic = request.POST.get('img')
+        instance.pic = request.FILES['uploadFromPC']
         instance.save()
         return HttpResponseRedirect('/home/home')
     else:

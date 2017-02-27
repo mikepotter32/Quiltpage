@@ -1,6 +1,35 @@
 {% extends "home/nav.html" %}
 
 {% block real_content %}
+<style>
+
+  .panel-primary {
+    width: 200px !important;
+    height: 300px !important;
+    margin-left: 15px;
+    margin-right: 15px
+  }
+
+  .tab-content {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    height: 80vh;
+  }
+
+  .panel-body {
+    height: 70%;
+  }
+
+  .panel-header {
+    height: 15%;
+  }
+  .panel-footer {
+    height: 15%;
+  }
+</style>
 
   <div class="container-fluid">
     <ul class="nav nav-tabs" id="myTab">
@@ -27,21 +56,24 @@
         {% endif %}
       </ul>
 
-      <div>
+      <div class="container-fluid">
         {% for item in quilt_list %}
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <span><a href="#" class="panel-title">{{item.quiltID}}</a></span>
-            </div>
-            <div class="panel-body">
-              {% load staticfiles %}
-              <img src="{% static item.pic.url %}" heigh="300" width="300" class="img-responsive center-block" />
-            </div>
-            <div class="panel-footer">
-              <h3>$ {{item.cost}}</h3>
+
+          <div class="col-sm-3">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <span><a href="#" class="panel-title">{{item.quiltID}}</a></span>
+              </div>
+              <div class="panel-body">
+                <img src="{{MEDIA_URL}}{{item.pic.url}}" heigh="300" width="300" class="img-responsive center-block" />
+              </div>
+              <div class="panel-footer text-center">
+                <h4>${{item.cost}}</h4>
+              </div>
             </div>
           </div>
         {% endfor %}
+      </div>
     </div>
 
     <div id="yarn" class="tab-pane fade in">
